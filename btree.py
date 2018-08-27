@@ -90,12 +90,12 @@ if __name__ == "__main__":
     root.insert('180 - Section 2.2.1')
     root.insert('220 - Section 2.2.2')
 
-    print("in order")
+    print(">>> in order <<<")
     in_order_list = list()
     root.in_order_travers(lambda node: in_order_list.append(node.key[:3]))
     print(in_order_list)
 
-    print("print bfs by level")
+    print(">>> BFS <<<")
     root.travers_breadth_first_by_level(lambda nodes: print(','.join([str(x.key[6:]) for x in nodes])))
 
     # pre-order
@@ -103,13 +103,9 @@ if __name__ == "__main__":
     #   read book from front to back.
     #   first visit root, then left, left .. then .. right ..,
     #   e.g Book, Chapter 1, Section 1.1, Section 1.2, Section 1.2.1 ..., Chapter 2
-    print("pre order")
+    print(">>> pre order <<<")
     pre_order_list = list()
-    root.pre_order_travers(lambda node:
-        {
-
-            pre_order_list.append(node.key)
-        })
+    root.pre_order_travers(lambda node: pre_order_list.append(node.key))
     print(pre_order_list)
 
     # post-order
@@ -126,7 +122,7 @@ if __name__ == "__main__":
     root.insert('150 - -')
     root.insert('120 - Y')
     root.insert('200 - 4.0')
-    print("post order")
+    print(">>> post order <<<")
     post_order_list = list()
     root.post_order_travers(lambda node: post_order_list.append(node.key[6:]))
     print(post_order_list)
