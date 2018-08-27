@@ -77,30 +77,57 @@ class Tree:
 
 
 if __name__ == "__main__":
-    root = Tree('F')
-    root.insert('D')
-    root.insert('J')
-    root.insert('B')
-    root.insert('E')
-    root.insert('A')
-    root.insert('C')
-    root.insert('J')
-    root.insert('G')
-    root.insert('K')
-    root.insert('I')
 
-    print("print in order")
+    root = Tree('100 - Book')
+    root.insert('050 - Chapter 1')
+    root.insert('040 - Section 1.1')
+    root.insert('060 - Section 1.2')
+    root.insert('055 - Section 1.2.1')
+    root.insert('065 - Section 1.2.2')
+    root.insert('150 - Chapter 2')
+    root.insert('120 - Section 2.1')
+    root.insert('200 - Section 2.2')
+    root.insert('180 - Section 2.2.1')
+    root.insert('220 - Section 2.2.2')
+
+    print("in order")
     in_order_list = list()
-    root.in_order_travers(lambda node: in_order_list.append(node.key))
+    root.in_order_travers(lambda node: in_order_list.append(node.key[:3]))
     print(in_order_list)
+
+    print("print bfs by level")
+    root.travers_breadth_first_by_level(lambda nodes: print(','.join([str(x.key[6:]) for x in nodes])))
+
+    # pre-order
+    # example:
+    #   read book from front to back.
+    #   first visit root, then left, left .. then .. right ..,
+    #   e.g Book, Chapter 1, Section 1.1, Section 1.2, Section 1.2.1 ..., Chapter 2
+    print("pre order")
     pre_order_list = list()
-    root.pre_order_travers(lambda node: pre_order_list.append(node.key))
+    root.pre_order_travers(lambda node:
+        {
+
+            pre_order_list.append(node.key)
+        })
     print(pre_order_list)
+
+    # post-order
+    # example:
+    #   evaluate expressions. First evaluate its two subtrees (left and right)
+    #   and then apply the appropriate binary operator to the results (root)
+    #
+    root = Tree('100 - *')
+    root.insert('050 - +')
+    root.insert('040 - 17.5')
+    root.insert('060 - /')
+    root.insert('055 - 5.0')
+    root.insert('065 - X')
+    root.insert('150 - -')
+    root.insert('120 - Y')
+    root.insert('200 - 4.0')
+    print("post order")
     post_order_list = list()
-    root.post_order_travers(lambda node: post_order_list.append(node.key))
+    root.post_order_travers(lambda node: post_order_list.append(node.key[6:]))
     print(post_order_list)
-    # print("print bfs by level")
-    # root.travers_breadth_first_by_level(lambda nodes: print(' '.join([str(x.key) for x in nodes])))
-    # print("print bfs by node")
-    # root.travers_breadth_first_by_node(lambda node: print(str(node.key)))
 
