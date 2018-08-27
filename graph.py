@@ -1,6 +1,4 @@
-# Python3 Program to print BFS traversal
-# from a given source vertex. BFS(int s)
-# traverses vertices reachable from s.
+# print BFS traversal
 from collections import defaultdict
 
 
@@ -39,11 +37,11 @@ class Graph:
             print(s, end=" ")
 
             # Get all adjacent vertices of the
-            # dequeued vertex s. If a adjacent
+            # de-queued vertex s. If a adjacent
             # has not been visited, then mark it
             # visited and enqueue it
             for i in self.graph[s]:
-                if visited[i] == False:
+                if visited[i] is False:
                     queue.append(i)
                     visited[i] = True
 
@@ -58,4 +56,4 @@ if __name__ == "__main__":
     g.add_edge(3, 3)
 
     # Following is Breadth First Traversal (starting from vertex 2)
-    g.print_bfs(2)
+    g.print_bfs(1)
