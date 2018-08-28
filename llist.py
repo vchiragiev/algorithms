@@ -1,3 +1,5 @@
+import datetime
+
 
 class Node:
 
@@ -88,26 +90,36 @@ class Node:
             ptr2 = ptr3
         return ptr1
 
+    def reverse2(self, prev):
+        ptr = self.next
+        self.next = prev
+        if ptr:
+            return ptr.reverse2(self)
+        else:
+            return self
+
 
 if __name__ == "__main__":
     tail = Node(0)
     head = tail
-    for i in range(1,20):
+    for i in range(1,30):
         head = head.push(i)
 
     # Create a loop for testing
-    tail.next = head.next.next.next.next.next
-    loop_node = head.detect_loop()
-    print("Loop node: " + str("none" if loop_node is None else loop_node.data))
-    head.remove_loop(loop_node)
-    print("Linked List after removing loop")
+    #tail.next = head.next.next.next.next.next
+    #loop_node = head.detect_loop()
+    #print("Loop node: " + str("none" if loop_node is None else loop_node.data))
+    #head.remove_loop(loop_node)
+
+    print("List")
     head.print_list()
-    print("Reversed Linked List")
+
+    print("Reverse Loop")
     head = head.reverse()
     head.print_list()
 
-    print("Reversed Linked List2")
-    head = head.reverse()
+    print("Reverse Recursive")
+    head = head.reverse2(None)
     head.print_list()
 
 
