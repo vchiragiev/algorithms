@@ -61,6 +61,32 @@ class Node:
         while temp:
             print(temp.data, end=" ")
             temp = temp.next
+        print()
+
+    def copy_reverse(self):
+        ptr = self
+        new_head = Node(ptr.data)
+        while ptr.next:
+            ptr = ptr.next
+            new_head = new_head.push(ptr.data)
+        return new_head
+
+    def reverse(self):
+        ptr1 = self
+        ptr2 = self.next
+        self.next = None
+
+        while ptr2:
+            # remember the 3rd node
+            ptr3 = ptr2.next
+
+            # reverse the link
+            ptr2.next = ptr1
+
+            # shift right
+            ptr1 = ptr2
+            ptr2 = ptr3
+        return ptr1
 
 
 if __name__ == "__main__":
@@ -76,3 +102,12 @@ if __name__ == "__main__":
     head.remove_loop(loop_node)
     print("Linked List after removing loop")
     head.print_list()
+    print("Reversed Linked List")
+    head = head.reverse()
+    head.print_list()
+
+    print("Reversed Linked List2")
+    head = head.reverse()
+    head.print_list()
+
+
