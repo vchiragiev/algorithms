@@ -73,6 +73,6 @@ if __name__ == "__main__":
     tail.next = head.next.next.next
     loop_node = head.detect_loop()
     print("Loop node: " + "none" if loop_node is None else loop_node.data)
-
+    head.remove_loop(loop_node)
     print("Linked List after removing loop")
     #head.print_list()
