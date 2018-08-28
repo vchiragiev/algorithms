@@ -1,5 +1,5 @@
 from collections import deque
-
+from typing import Deque
 
 class Tree:
     # TODO: encapsulate properties ("private" or "readonly")
@@ -74,6 +74,21 @@ class Tree:
             if node.right is not None:
                 q1.append(node.right)
 
+    def in_order_travers_loop(self, function_ref):
+        stack: Deque[Tree] = deque()
+        stack.append(self)
+        while stack[-1].left:
+            stack.append(stack[-1].left)
+
+        while len(stack):
+            current = stack.pop()
+            function_ref(current)
+
+            if current.right:
+                stack.append(current.right)
+                while stack[-1].left:
+                    stack.append(stack[-1].left)
+
 
 if __name__ == "__main__":
 
@@ -93,6 +108,12 @@ if __name__ == "__main__":
     in_order_list = list()
     root.in_order_travers(lambda node: in_order_list.append(node.key[:3]))
     print(in_order_list)
+
+    print(">>> in order loop <<<")
+    in_order_list.clear()
+    root.in_order_travers_loop(lambda node: in_order_list.append(node.key[:3]))
+    print(in_order_list)
+
 
     print(">>> BFS <<<")
     root.travers_breadth_first_by_level(lambda nodes: print(','.join([str(x.key[6:]) for x in nodes])))
