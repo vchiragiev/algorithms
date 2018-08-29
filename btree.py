@@ -3,7 +3,8 @@ from typing import Deque
 
 class Tree:
     # TODO: encapsulate properties ("private" or "readonly")
-    def __init__(self, key):
+    def __init__(self, key, parent=None):
+        self.parent: Tree = parent
         self.left: Tree = None
         self.right: Tree = None
         self.key = key
@@ -12,13 +13,13 @@ class Tree:
     def insert(self, key):
         if key < self.key:
             if self.left is None:
-                self.left = Tree(key)
+                self.left = Tree(key, self)
                 return self.left
             else:
                 return self.left.insert(key)
         else:
             if self.right is None:
-                self.right = Tree(key)
+                self.right = Tree(key, self)
                 return self.right
             else:
                 return self.right.insert(key)
@@ -89,6 +90,24 @@ class Tree:
                 while stack[-1].left:
                     stack.append(stack[-1].left)
 
+    def in_order_travers_parent(self, function_ref):
+        current = self
+        vector = "down"
+        while current:
+            if "up" not in vector:
+                while current.left:
+                    current = current.left
+            if vector != "up_r":
+                function_ref(current)
+            if vector != "up_r" and current.right:
+                current = current.right
+                vector = "down"
+            elif current.parent:
+                vector = "up_l" if current.parent.left == current else "up_r"
+                current = current.parent
+            else:
+                current = None
+
 
 if __name__ == "__main__":
 
@@ -114,7 +133,13 @@ if __name__ == "__main__":
     root.in_order_travers_loop(lambda node: in_order_list.append(node.key[:3]))
     print(in_order_list)
 
+    print(">>> in order parent <<<")
+    in_order_list.clear()
+    root.in_order_travers_parent(lambda node: in_order_list.append(node.key[:3]))
+    print(in_order_list)
 
+
+"""
     print(">>> BFS <<<")
     root.travers_breadth_first_by_level(lambda nodes: print(','.join([str(x.key[6:]) for x in nodes])))
 
@@ -146,4 +171,4 @@ if __name__ == "__main__":
     post_order_list = list()
     root.post_order_travers(lambda node: post_order_list.append(node.key[6:]))
     print(post_order_list)
-
+"""
