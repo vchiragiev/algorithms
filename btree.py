@@ -91,19 +91,21 @@ class Tree:
                     stack.append(stack[-1].left)
 
     def in_order_travers_parent(self, function_ref):
-        current = self
         vector = "down"
+        current = self
         while current:
-            if "up" not in vector:
+            if vector == "down":
                 while current.left:
                     current = current.left
-            if vector != "up_r":
+                    vector = "down"
+
+            if vector != "up_from_r":
                 function_ref(current)
-            if vector != "up_r" and current.right:
-                current = current.right
+            if current.right and vector != "up_from_r":
                 vector = "down"
+                current = current.right
             elif current.parent:
-                vector = "up_l" if current.parent.left == current else "up_r"
+                vector = "up_from_l" if current.parent.left == current else "up_from_r"
                 current = current.parent
             else:
                 current = None
