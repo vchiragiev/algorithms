@@ -18,7 +18,7 @@ def split(data, i_left: int, i_right: int):
             i_left += 1
         while i_right >= i_left and data[i_right] >= data[i_mid]:
             i_right -= 1
-        if i_right >= i_left:
+        if i_right > i_left:
             tmp = data[i_left]
             data[i_left] = data[i_right]
             data[i_right] = tmp
@@ -32,7 +32,7 @@ def split(data, i_left: int, i_right: int):
 
 
 if __name__ == "__main__":
-    unsorted = [5,2,9,4,0,3,1]
+    unsorted = [5,2,9,4,0,3,1,5, 4,2,3,4,8,5,8,2]
     print(unsorted)
     quick_sort(unsorted, 0, len(unsorted)-1)
     print(unsorted)
