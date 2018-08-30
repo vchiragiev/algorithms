@@ -22,6 +22,7 @@ def atoi(text, int_min, int_max):
         negative = True
         if text_len == 1: return None
         text = text[1:]
+        text_len = text_len - 1
 
     # highest mask = 10^text_len-1 (10, 100, 1000, etc )
     mask = int(math.pow(10, text_len-1))
@@ -45,4 +46,4 @@ def atoi(text, int_min, int_max):
 
 if __name__ == "__main__":
     # print_range_without_loop(10)
-    print(atoi("32459",-100000, 100000))
+    print(atoi("-32459",-100000, 100000))
